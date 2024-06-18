@@ -15,11 +15,11 @@ jobs:
       - name: Build
         run: npm run build
       - name: Deploy
-        uses: wlixcc/SFTP-Deploy-Action@v1.0
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
           username: 'root'
           server: '${{ secrets.FTP_SERVER }}'
-          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          password: ${{ secrets.FTP_PASSWORD }}
           local_path: './build/*'
           remote_path: '/var/www/dungeonlooter.ru'
           args: '-o ConnectTimeout=5' 
