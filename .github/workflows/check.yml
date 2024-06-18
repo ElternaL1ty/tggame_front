@@ -22,7 +22,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }} # Your server's SSH private key
           script: |
             cd /var/www/dungeonlooter.ru
-            git pull
+            git pull origin master
             npm install
             npm run build
             pm2 restart npm
