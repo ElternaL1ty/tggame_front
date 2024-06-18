@@ -19,7 +19,7 @@ jobs:
         with:
           host: ${{ secrets.FTP_SERVER }} # Your server's IP address
           username: ${{ secrets.FTP_USERNAME }} # Your server's username
-          key: ${{ secrets.SSH_PRIVATE_KEY }} # Your server's SSH private key
+          password: ${{ secrets.FTP_PASSWORD }} # Your server's SSH private key
           script: |
             cd /var/www/dungeonlooter.ru # Specify the path to your app directory on the server
             git pull
