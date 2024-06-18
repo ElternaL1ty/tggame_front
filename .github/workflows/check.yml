@@ -1,4 +1,4 @@
-name: Ckeck
+name: Check
 on: push
 jobs:
   lint:
