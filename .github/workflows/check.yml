@@ -1,36 +1,25 @@
 name: Check
 on: push
 jobs:
-  # lint:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v3
-  #     - name: Install deps
-  #       run: npm ci
-  #     - name: Lint
-  #       run: npm run lint  
-  # test:
-  #   needs: [lint]
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v3
-  #     - name: Install deps
-  #       run: npm ci
-  #     - name: Test
-  #       run: npm run test  
   deploy:
-    # needs: [test]
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-      - name: Deploy to Hosting
-        uses: SamKirkland/FTP-Deploy-Action@4.0.0
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install deps
+        run: npm ci
+      - name: Lint
+        run: npm run lint  
+      - name: Test
+        run: npm run test
+      - name: Build
+        run: npm run build
+      - name: Deploy
+        uses: wlixcc/SFTP-Deploy-Action@v1.0
         with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: dungeonlooter.ru/tggame/
-          protocol: ftp
+          username: 'root'
+          server: '${{ secrets.FTP_SERVER }}'
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          local_path: './build/*'
+          remote_path: '/var/www/dungeonlooter.ru'
+          args: '-o ConnectTimeout=5' 
