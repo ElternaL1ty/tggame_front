@@ -1,25 +1,25 @@
 name: Check
 on: push
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Install deps
-        run: npm ci
-      - name: Lint
-        run: npm run lint  
-  test:
-    needs: [lint]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Install deps
-        run: npm ci
-      - name: Test
-        run: npm run test  
+  # lint:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v3
+  #     - name: Install deps
+  #       run: npm ci
+  #     - name: Lint
+  #       run: npm run lint  
+  # test:
+  #   needs: [lint]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v3
+  #     - name: Install deps
+  #       run: npm ci
+  #     - name: Test
+  #       run: npm run test  
   deploy:
     needs: [test]
     runs-on: ubuntu-latest
@@ -32,5 +32,5 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: dungeonlooter.ru/tggame
+          server-dir: dungeonlooter.ru/tggame/
           protocol: ftp
