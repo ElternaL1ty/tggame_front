@@ -15,9 +15,13 @@ jobs:
       - name: Build
         run: npm run build
       - name: Deploy
-        uses: Luis97lol/PSFTP@v1.4
+        uses: Dylan700/sftp-upload-action@latest
         with:
-          user: 'root'
-          host: ${{ secrets.FTP_SERVER }}
-          pass: ${{ secrets.FTP_PASSWORD }}
-          scriptPath: deploy.sh
+          server: ${{ secrets.FTP_SERVER }}
+          username: 'root'
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: 22
+          uploads: |
+            ./ => ./www/dungeonlooter.ru/
+          ignore: |
+            */node_modules
