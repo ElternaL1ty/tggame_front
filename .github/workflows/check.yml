@@ -21,8 +21,8 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }} # Your server's username
           password: ${{ secrets.FTP_PASSWORD }} # Your server's SSH private key
           script: |
-            cd /var/www/dungeonlooter.ru # Specify the path to your app directory on the server
+            cd /var/www/dungeonlooter.ru
             git pull
             npm install
             npm run build
-            pm2 start npm -- start --name dl # Replace with your PM2 service name
+            pm2 restart npm
