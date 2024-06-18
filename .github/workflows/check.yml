@@ -20,3 +20,17 @@ jobs:
         run: npm ci
       - name: Test
         run: npm run test  
+  deploy:
+  needs: [test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Deploy to Hosting
+        uses: SamKirkland/FTP-Deploy-Action@4.0.0
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: dungeonlooter.ru/tggame
+          protocol: sftp
